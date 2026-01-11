@@ -1,0 +1,33 @@
+{
+    "name": "polirium-datatable",
+    "version": "1.0.0",
+    "description": "Polirium Advanced Datatables using Laravel Livewire - Forked from PowerGrid",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite build --watch",
+        "blade-formatter": "blade-formatter --write resources/**/*.blade.php"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/polirium/polirium-datatable"
+    },
+    "author": "Polirium Team",
+    "license": "MIT",
+    "type": "module",
+    "bugs": {
+        "url": "https://github.com/polirium/polirium-datatable/issues"
+    },
+    "homepage": "https://github.com/polirium/polirium-datatable#readme",
+    "devDependencies": {
+        "alpinejs": "^3.14.7",
+        "blade-formatter": "^1.41.1",
+        "cypress": "^13.16.1",
+        "sass": "^1.82.0",
+        "tom-select": "^2.4.1",
+        "vite": "^6.4.1"
+    }
+}

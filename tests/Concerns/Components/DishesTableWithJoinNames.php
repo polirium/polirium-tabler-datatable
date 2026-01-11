@@ -1,0 +1,63 @@
+<?php
+
+namespace Polirium\Datatable\Tests\Concerns\Components;
+
+use Illuminate\Database\Eloquent\Builder;
+use Polirium\Datatable\{Column, Facades\PowerGrid, PowerGridComponent, PowerGridFields};
+use Polirium\Datatable\Tests\Concerns\Models\Dish;
+
+class DishesTableWithJoinNames extends PowerGridComponent
+{
+    public string $tableName = 'testing-dishes-with-join-names-table';
+
+    public ?string $primaryKeyAlias = 'id';
+
+    public function setUp(): array
+    {
+        return [
+            PowerGrid::header()
+                ->showSearchInput(),
+        ];
+    }
+
+    public function dataSource(): Builder
+    {
+        return Dish::query()
+            ->join('categories as newCategories', function ($categories) {
+                $categories->on('dishes.category_id', '=', 'newCategories.id');
+            })
+            ->select('dishes.*', 'newCategories.name as category_name');
+    }
+
+    public function fields(): PowerGridFields
+    {
+        return PowerGrid::fields()
+            ->add('id')
+            ->add('dish_name', fn ($dish) => $dish->name)
+            ->add('category_name', fn ($dish) => $dish->category->name);
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::make('Id', 'id')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('Dish', 'dish_name', 'dishes.name')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('Category', 'category_name', 'newCategories.name')
+                ->searchable()
+                ->sortable(),
+
+            Column::action('Action'),
+        ];
+    }
+
+    public function setTestThemeClass(string $themeClass): void
+    {
+        config(['polirium-datatable.theme' => $themeClass]);
+    }
+}

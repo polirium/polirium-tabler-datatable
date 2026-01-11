@@ -1,0 +1,64 @@
+<?php
+
+namespace Polirium\Datatable\Tests\Concerns\Components;
+
+use Illuminate\Database\Eloquent\Builder;
+use Polirium\Datatable\{Column, Facades\PowerGrid, PowerGridComponent, PowerGridFields};
+use Polirium\Datatable\Tests\Concerns\Models\Dish;
+
+class DishesSearchJSONTable extends PowerGridComponent
+{
+    public string $tableName = 'testing-dishes-search-json-table';
+
+    public function setUp(): array
+    {
+        return [
+            PowerGrid::header()
+                ->showSearchInput(),
+
+            PowerGrid::footer()
+                ->showPerPage()
+                ->showRecordCount(),
+        ];
+    }
+
+    public function datasource(): Builder
+    {
+        return Dish::query()
+            ->join('categories', function ($categories) {
+                $categories->on('dishes.category_id', '=', 'categories.id');
+            })
+            ->select('dishes.*', 'categories.name as category_name');
+    }
+
+    public function fields(): PowerGridFields
+    {
+        return PowerGrid::fields()
+            ->add('id')
+            ->add('name')
+            ->add('additional');
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::make('ID', 'id')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('name', 'name'),
+
+            Column::make('Adicional', 'additional')
+               // ->searchable()
+                ->searchableJson('dishes')
+                ->sortable(),
+
+            Column::action('Action'),
+        ];
+    }
+
+    public function setTestThemeClass(string $themeClass): void
+    {
+        config(['polirium-datatable.theme' => $themeClass]);
+    }
+}
