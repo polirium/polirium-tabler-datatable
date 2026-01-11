@@ -10,6 +10,17 @@ class Tabler extends Theme
 {
     public string $name = 'tabler';
 
+    public function layout(): array
+    {
+        return [
+            'table' => $this->root().'.table-base',
+            'table-content' => $this->root().'.table',
+            'header' => $this->root().'.header',
+            'pagination' => $this->root().'.pagination',
+            'footer' => $this->root().'.footer',
+        ];
+    }
+
     public function table(): array
     {
         return [

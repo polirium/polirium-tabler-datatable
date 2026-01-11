@@ -300,8 +300,10 @@ class PowerGridComponent extends Component
 
         $this->resolveFilters();
 
+        $tableView = theme_style($this->theme, 'layout.table-content', 'polirium-datatable::components.table');
+
         return view(theme_style($this->theme, 'layout.table'), [
-            'table' => 'polirium-datatable::components.table',
+            'table' => $tableView,
             'data' => isset($this->setUp['lazy']) ? $data : [],
         ]);
     }

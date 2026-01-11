@@ -1,3 +1,1 @@
-<td
-    class="{{ theme_style($theme, 'table.body.td') }}"
-></td>
+{{-- Hide toggle detail column for Tabler theme - click on row instead --}}

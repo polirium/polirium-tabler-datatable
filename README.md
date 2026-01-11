@@ -1,159 +1,100 @@
-<div align="center">
-   <p><a href="https://polirium-datatable.com" target="_blank"><img src="art/header.jpg" alt="PowerGrid Logo"></a></p>
-   <p align="center">
-      <a href="https://packagist.org/packages/power-components/polirium-datatable"><img alt="Latest Version" src="https://img.shields.io/static/v1?label=laravel&message=%E2%89%A510.0&color=0078BE&logo=laravel&style=flat-square"></a>
-      <a href="https://packagist.org/packages/power-components/polirium-datatable"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/power-components/polirium-datatable"></a>
-      <a href="https://github.com/Power-Components/polirium-datatable/actions">
-      <img alt="Tests Passing" src="https://img.shields.io/github/actions/workflow/status/power-components/polirium-datatable/mysql.yml?label=Tests" /></a>
-      <a href="https://packagist.org/packages/power-components/polirium-datatable"><img alt="Latest Version" src="https://img.shields.io/packagist/v/power-components/polirium-datatable"></a>
-      <a href="https://packagist.org/packages/power-components/polirium-datatable"><img alt="License" src="https://img.shields.io/packagist/l/power-components/polirium-datatable"></a>
-      <a href="https://packagist.org/packages/power-components/polirium-datatable"><img alt="Last Commit" src="https://img.shields.io/github/last-commit/power-components/polirium-datatable"></a>
-   </p>
-   <a href="https://polirium-datatable.com" target="_blank">📚 Documentation</a> |
-   <a href="#-online-interactive-demo" target="_blank"> 🚀 Online Demo</a> |
-   <a href="#-features">🔥 Features</a> |
-   <a href="#get-started">⌨️ Get started</a>
-</div>
+# Polirium Tabler Datatable
 
-------
+> Một datatable component mạnh mẽ cho Laravel Livewire với giao diện Tabler UI
 
-# ⚡ Livewire PowerGrid ⚡
+## Giới thiệu
 
-<br/>
+Polirium Tabler Datatable là một package nội bộ của Polirium, được xây dựng dựa trên Livewire PowerGrid. Package cung cấp các tính năngdatatable hiện đại, dễ tùy chỉnh cho các ứng dụng Laravel.
 
-Livewire PowerGrid creates modern, powerful and easy-to-customize data tables based on [Laravel Livewire](https://laravel-livewire.com) library.
+## Tính năng
 
-With PowerGrid, you can effortlessly create advanced data tables one in a matter of minutes.
+- ✅ **Tabler UI Framework** - Giao diện đẹp mắt, tích hợp sẵn với Tabler
+- ✅ **Phân trang** - Hỗ trợ phân trang tự động
+- ✅ **Sắp xếp cột** - Sắp xếp dữ liệu theo cột
+- ✅ **Bộ lọc & Tìm kiếm** - Lọc dữ liệu theo nhiều điều kiện khác nhau
+- ✅ **Chỉnh sửa inline** - Click để edit trực tiếp trên bảng
+- ✅ **Hàng loạt hành động** - Bulk actions với checkbox
+- ✅ **Export dữ liệu** - Xuất ra XLSX/CSV
+- ✅ **Responsive** - Hiển thị tốt trên mọi thiết bị
+- ✅ **Đa ngôn ngữ** - Hỗ trợ tiếng Việt và nhiều ngôn ngữ khác
 
-<p>
-    <a href="https://demo.polirium-datatable.com/examples/demo-dish" target="_blank"><img src="https://polirium-datatable.com/screenshot.png" alt="PowerGrid Screenshot" width="805"></a>
-</p>
+## Cài đặt
 
-`🚀` **Minimal Configuration**
-
-Tables have basic features activated by default. Ready to go!
-
-`👍` **Minimal Configuration**
-
-Extend and customize your Table including components (checkbox, action buttons, editable fields), global search feature, column data filters and data export tool.
-
-`🛠️` **Minimal Configuration**
-
-Table components include feature examples. Just uncomment some code, enter your data, and it works!
-
-<br/>
-
-## 🚀 Online Interactive Demo
-
-Take a look at our Online Interactive Demo showcasing the latest PowerGrid features. Explore the source code, and get your Data Table up and running in no time.
-
-`🌎` <a href="https://demo.polirium-datatable.com" target="_blank">PowerGrid Online Demo</a>
-
-<br/>
-
-## 🔥 Features
-
-PowerGrid offers a range of features that are readily available:
-
-| Feature                                                            | PowerGrid                               |
-| :--------------------------------------------------------------------- | :-------------------------------------- |
-| Bootstrap 5 or Tailwind CSS 3x/4x                                      | ✅                                      |
-| Pagination                                                             | ✅                                      |
-| Column Sorting                                                         | ✅                                      |
-| Filters & Global Search                                                | ✅                                      |
-| Custom Filter Builder                                                  | ✅                                      |
-| Inline Editing (Click to edit)                                         | ✅                                      |
-| Row Buttons, Checkboxes, Dropdown menu, and Toggle Switch              | ✅                                      |
-| Custom Cell Content (Links, images, currency formatting)               | ✅                                      |
-| Multi-row Bulk Actions                                                 | ✅                                      |
-| Conditional Action Rules for Rows, Buttons, and Checkboxes             | ✅                                      |
-| Column Summaries (Sum, Count & Average)                                | ✅                                      |
-| Data Export to XLSX/CSV (OpenSpout)                                    | ✅                                      |
-| Queue Export for large datasets                                        | ✅                                      |
-| Responsive                                                             | ✅                                      |
-| Livewire Modal Integration (Wire Elements Modal)                       | ✅                                      |
-| Multi Language                                                         | Available in 🇺🇸 🇧🇷 🇪🇸 🇮🇹 🇩🇪 and [more...](https://github.com/Power-Components/polirium-datatable/tree/6.x/resources/lang) |
-
-`📚` Learn more in our [Documentation](https://polirium-datatable.com).
-
-<br/>
-
-## Get started
-
-### Requirements
+### Yêu cầu
 
 - PHP 8.2+
-- [Laravel 10+](https://laravel.com/docs/installation)
-- [Livewire 3.0x](https://livewire.laravel.com)
-- [Tailwind 3x/4x](https://tailwindcss.com) or [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- Laravel 10+
+- Livewire 3.0+
+- [Tabler UI](https://tabler.io)
 
-<br/>
+### Cách sử dụng
 
-### Install PowerGrid
+Package này được cài đặt sẵn trong Polirium Platform. Không cần cài đặt thủ công.
 
-Require PowerGrid via [composer](https://getcomposer.org).
+### Cấu hình
 
 ```bash
-composer require power-components/polirium-datatable
+php artisan vendor:publish --tag=polirium-datatable-config
 ```
 
-Then, follow the steps indicated in the [Documentation - Install page](https://polirium-datatable.com/get-started/install.html).
+File config sẽ được xuất tại `config/polirium-datatable.php`
 
-<br/>
+## Hướng dẫn sử dụng cơ bản
 
-## Support & Community
+### Tạo DataTable mới
 
-`👥` **Interact with the PowerGrid community at our [Discussions](https://github.com/Power-Components/polirium-datatable/discussions) tab.**
+```bash
+php artisan make:datatable ProductTable
+```
 
-You can share ideas, find questions and answers, and collaborate with other PowerGrid users.
+### Định nghĩa cột
 
-<br/>
+```php
+use PowerComponents\LivewirePowerGrid\Column;
 
-`🛟` **For technical inquiries, bug reports, and feature requests, please use the [Issues](https://github.com/Power-Components/polirium-datatable/issues) tab.**
+public function columns(): array
+{
+    return [
+        Column::add()
+            ->title('ID')
+            ->field('id')
+            ->sortable(),
 
-Please look into our previous Issues and Discussions before submitting a new issue.
+        Column::add()
+            ->title('Tên')
+            ->field('name')
+            ->searchable()
+            ->sortable(),
+    ];
+}
+```
 
-<br/>
+### DataSource
 
-## Contribute
+```php
+public function datasource(): ?Builder
+{
+    return Product::query();
+}
+```
 
-`🙏` **You can help PowerGrid in a number of ways; contributing goes beyond writing code.**
+## Framework hỗ trợ
 
-Please read the [Contributing Guide](CONTRIBUTING.md) to see what kind of contributions you can make and what steps you should follow.
+Package hiện tại hỗ trợ các framework sau:
 
-<br/>
+| Framework | Trạng thái |
+|-----------|------------|
+| Tabler UI | ✅ Mặc định |
+| Bootstrap 5 | ✅ Có sẵn |
 
-## Credits
+## Tài liệu tham khảo
 
-- Created by [Luan Freitas](https://twitter.com/luanfreitasdev) and [@DanSysAnalyst](https://github.com/dansysanalyst)
-- [All Contributors](../../contributors)
-- Logo & artwork by [Caneco](https://twitter.com/caneco)
+Vì đây là package nội bộ, vui lòng liên kết với team phát triển để được hỗ trợ.
 
-<hr>
+## Phiên bản
 
-<p>Sponsored by:</p>
-<p>
-  <!--DevSquad-->
-  <a href="https://devsquad.com" target="_blank">
-    <img src="https://polirium-datatable.com/sponsors/devsquad.png" alt="DevSquad" height="64">
-  </a>
-</p>
+Phiên bản hiện tại: **1.0.0**
 
-<p></p>
-<p></p>
+## License
 
-<p>With the support of:</p>
-<p>
-  <!-- PHPStorm -->
-  <a href="https://www.jetbrains.com/phpstorm/" target="_blank">
-    <img src="https://polirium-datatable.com/sponsors/phpstorm.png" alt="PHPStorm" height="32">
-  </a>
-  <!-- Araxis Merge -->
-  <a href="https://www.araxis.com/merge/" target="_blank">
-    <img src="https://polirium-datatable.com/sponsors/araxis.png" alt="Araxis Merge" height="32">
-  </a>
-</p>
-
-<hr>
-
-<sup><b>Notice of Non-Affiliation and Disclaimer:</b> Livewire PowerGrid is not affiliated with, associated with, endorsed by, or in any way officially connected with the <a href="https://laravel-livewire.com" target="_blank">Laravel Livewire</a> - copyright by Caleb Porzio. Laravel is a trademark of Taylor Otwell.</sup>
+© 2025 Polirium. Package nội bộ, không được phân phối bên ngoài.
