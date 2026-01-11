@@ -9,35 +9,31 @@
         </div>
 
         <div class="card-body border-bottom py-3">
-            <div class="d-flex">
-                <div class="text-secondary">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <div class="d-flex flex-wrap gap-2 align-items-center text-secondary">
                     @if (filled(data_get($setUp, 'footer.perPage')) && count(data_get($setUp, 'footer.perPageValues')) > 1)
-                        <span class="me-2">
-                            {{ trans('polirium-datatable::datatable.pagination.show') }}
-                        </span>
-                        <div class="mx-2 d-inline-block">
-                            <select
-                                wire:model.live="setUp.footer.perPage"
-                                class="form-select form-select-sm {{ theme_style($theme, 'footer.select') }}"
-                                style="width: auto;"
-                            >
-                                @foreach (data_get($setUp, 'footer.perPageValues') as $value)
-                                    <option value="{{ $value }}">
-                                        @if ($value == 0)
-                                            {{ trans('polirium-datatable::datatable.labels.all') }}
-                                        @else
-                                            {{ $value }}
-                                        @endif
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <span class="ms-2">
-                            {{ trans('polirium-datatable::datatable.pagination.entries') }}
+                        <span class="text-nowrap">Show</span>
+                        <select
+                            wire:model.live="setUp.footer.perPage"
+                            class="form-select form-select-sm {{ theme_style($theme, 'footer.select') }}"
+                            style="width: auto;"
+                        >
+                            @foreach (data_get($setUp, 'footer.perPageValues') as $value)
+                                <option value="{{ $value }}">
+                                    @if ($value == 0)
+                                        {{ trans('polirium-datatable::datatable.pagination.all') }}
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </option>
+                            @endforeach
+                        </select>
+                        <span class="text-nowrap">
+                            {{ trans('polirium-datatable::datatable.labels.results_per_page') }}
                         </span>
                     @endif
 
-                    <div x-data="pgRenderActions" class="d-inline-flex ms-3">
+                    <div x-data="pgRenderActions">
                         <span class="{{ theme_style($theme, 'table.layout.actions') }}" x-html="toHtml"></span>
                     </div>
 
@@ -46,7 +42,7 @@
                     @includeIf(data_get($theme, 'root') . '.header.soft-deletes')
                 </div>
 
-                <div class="ms-auto text-secondary">
+                <div class="ms-auto d-flex gap-2 align-items-center text-secondary">
                     @if (config('polirium-datatable.filter') === 'outside')
                         @include(data_get($theme, 'root') . '.header.filters')
                     @endif

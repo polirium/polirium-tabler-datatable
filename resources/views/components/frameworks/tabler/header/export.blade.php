@@ -1,13 +1,13 @@
 <div class="dropdown">
     <button
-        class="btn btn-secondary dropdown-toggle"
+        class="btn btn-sm btn-secondary dropdown-toggle"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
     >
         <svg
-            width="20"
-            height="20"
+            width="16"
+            height="16"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

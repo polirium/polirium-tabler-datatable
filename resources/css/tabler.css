@@ -1,0 +1,129 @@
+@import "./base.css";
+@import "./editable.css";
+
+/* Tabler Datatable Styles */
+
+/* Fix table borders */
+.datatable {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.datatable th,
+.datatable td {
+    border-right: 1px solid var(--tbl-border-color, #e6e7e9);
+}
+
+.datatable th:last-child,
+.datatable td:last-child {
+    border-right: none;
+}
+
+/* Detail row animation */
+tr.detail-row {
+    transition: all 0.3s ease;
+}
+
+tr.detail-row td {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+tr.detail-row.show td {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Detail icon animation */
+.detail-toggle-icon {
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+
+.detail-toggle-icon.rotate {
+    transform: rotate(45deg);
+}
+
+/* Row hover effect */
+.datatable tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.datatable tbody tr:hover {
+    background-color: rgba(var(--tbl-primary-rgb, 13, 110, 253), 0.04);
+}
+
+/* Action column border fix */
+.datatable td[data-column="actions"] {
+    border-right: none;
+}
+
+/* Detail row background */
+tr[data-detail="true"] {
+    background-color: rgba(var(--tbl-primary-rgb, 13, 110, 253), 0.02);
+}
+
+/* Expandable detail animation */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Smooth collapse */
+.detail-collapse {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.detail-collapse.collapsed {
+    max-height: 0;
+    opacity: 0;
+}
+
+.detail-collapse.expanded {
+    max-height: 500px;
+    opacity: 1;
+}
+
+/* Tabler specific table styles */
+.table-vcenter td {
+    vertical-align: middle;
+}
+
+/* Cursor pointer for detail rows */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Alpine x-transition classes for detail row */
+.detail-row-enter {
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, max-height 0.25s ease-out;
+}
+
+.detail-row-enter-start {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+}
+
+.detail-row-enter-end {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 1000px;
+}
+
+.detail-row-leave {
+    transition: opacity 0.15s ease-in, transform 0.15s ease-in, max-height 0.2s ease-in;
+}
+
+.detail-row-leave-start {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 1000px;
+}
+
+.detail-row-leave-end {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+}

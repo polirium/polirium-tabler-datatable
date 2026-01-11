@@ -41,6 +41,19 @@ trait Listeners
         $this->persistState('columns');
     }
 
+    /**
+     * Restore hidden columns from localStorage on page load
+     */
+    public function restoreHiddenColumns(array $hiddenFields): void
+    {
+        foreach ($this->columns as &$column) {
+            $field = data_get($column, 'field');
+            if (in_array($field, $hiddenFields)) {
+                data_set($column, 'hidden', true);
+            }
+        }
+    }
+
     #[On('pg:eventRefresh-{tableName}')]
     public function refresh(): void
     {
