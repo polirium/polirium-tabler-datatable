@@ -1,0 +1,326 @@
+/**
+ * Mobile Card View for DataTable - Redesigned
+ * Professional card layout optimized for mobile devices
+ */
+
+/* ============================================
+   CSS Variables - Design Tokens
+   ============================================ */
+
+.datatable-mobile-wrapper {
+    --pg-card-bg: #ffffff;
+    --pg-card-border: #e2e8f0;
+    --pg-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --pg-card-shadow-hover: 0 4px 6px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --pg-card-radius: 0.75rem;
+    --pg-field-label-color: #64748b;
+    --pg-field-gap: 0.875rem;
+    --pg-card-header-bg: linear-gradient(to bottom, #f8fafc, #ffffff);
+    --pg-primary-text: #1e293b;
+    --pg-secondary-text: #475569;
+    --pg-divider-color: #f1f5f9;
+}
+
+/* Dark mode support */
+[data-bs-theme="dark"] .datatable-mobile-wrapper {
+    --pg-card-bg: #1e293b;
+    --pg-card-border: #334155;
+    --pg-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --pg-card-shadow-hover: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --pg-field-label-color: #94a3b8;
+    --pg-card-header-bg: linear-gradient(to bottom, #1e293b, #1e293b);
+    --pg-primary-text: #f1f5f9;
+    --pg-secondary-text: #cbd5e1;
+    --pg-divider-color: #334155;
+}
+
+/* ============================================
+   Mobile Card - Compact & Professional
+   ============================================ */
+
+.datatable-mobile-card {
+    background: var(--pg-card-bg);
+    border: 1px solid var(--pg-card-border);
+    border-radius: var(--pg-card-radius);
+    box-shadow: var(--pg-card-shadow);
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.datatable-mobile-card:active {
+    transform: scale(0.99);
+}
+
+/* ============================================
+   Card Header - Compact with Title + Actions
+   ============================================ */
+
+.datatable-mobile-card .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--pg-card-header-bg);
+    border-bottom: 1px solid var(--pg-card-border);
+    min-height: 3rem;
+}
+
+.datatable-mobile-card .card-title {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--pg-primary-text);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ============================================
+   Card Actions - Compact Buttons
+   ============================================ */
+
+.datatable-mobile-card .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-shrink: 0;
+}
+
+/* Mobile action buttons */
+.pg-actions-mobile {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.pg-actions-mobile .pg-btn,
+.pg-actions-mobile .btn {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+    min-height: 2.25rem;
+    min-width: 2.25rem;
+}
+
+.pg-actions-mobile .btn-icon {
+    padding: 0.375rem;
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+/* ============================================
+   Card Body - 2-Column Grid Layout
+   ============================================ */
+
+.datatable-mobile-card .card-body {
+    padding: 0.875rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 0.875rem;
+    align-items: start;
+}
+
+/* Full-width fields (long content) */
+.datatable-mobile-card .card-field.card-field-full {
+    grid-column: 1 / -1;
+}
+
+/* ============================================
+   Card Field - Compact Label + Value
+   ============================================ */
+
+.datatable-mobile-card .card-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.datatable-mobile-card .field-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pg-field-label-color);
+    line-height: 1.2;
+}
+
+.datatable-mobile-card .field-value {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--pg-primary-text);
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+/* Field value with muted color for secondary info */
+.datatable-mobile-card .field-value.field-value-secondary {
+    color: var(--pg-secondary-text);
+    font-weight: 400;
+}
+
+/* ============================================
+   Divider Between Sections
+   ============================================ */
+
+.datatable-mobile-card .card-divider {
+    grid-column: 1 / -1;
+    height: 1px;
+    background: var(--pg-divider-color);
+    margin: 0.25rem 0;
+}
+
+/* ============================================
+   Status Badges & Indicators
+   ============================================ */
+
+.datatable-mobile-card .status-badge,
+.datatable-mobile-card .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.71875rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    line-height: 1;
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+
+.datatable-mobile-empty {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--pg-field-label-color);
+}
+
+.datatable-mobile-empty svg,
+.datatable-mobile-empty i {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.3;
+}
+
+/* ============================================
+   View Toggle Button - Hide by Default
+   ============================================ */
+
+.datatable-view-toggle {
+    display: none !important;
+}
+
+/* ============================================
+   Responsive Visibility
+   ============================================ */
+
+@media (max-width: 767px) {
+    .datatable-hide-on-mobile {
+        display: none !important;
+    }
+
+    .datatable-show-on-mobile {
+        display: block !important;
+    }
+
+    /* Hide table view on mobile by default (fallback for when Alpine.js is not loaded) */
+    .datatable-table-view,
+    .power-grid-table {
+        display: none !important;
+    }
+
+    /* Show mobile card view */
+    .datatable-mobile-wrapper {
+        display: block !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .datatable-hide-on-desktop {
+        display: none !important;
+    }
+
+    .datatable-show-on-desktop {
+        display: block !important;
+    }
+
+    /* Show table view on desktop (fallback) */
+    .datatable-table-view {
+        display: block !important;
+    }
+
+    /* Hide mobile card view on desktop */
+    .datatable-mobile-wrapper {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+.datatable-mobile-card {
+    animation: cardFadeIn 0.2s ease-out;
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Touch-friendly interactions
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+    .datatable-mobile-card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ============================================
+   Small screens optimization
+   ============================================ */
+
+@media (max-width: 380px) {
+    .datatable-mobile-card .card-header {
+        padding: 0.625rem 0.875rem;
+    }
+
+    .datatable-mobile-card .card-body {
+        padding: 0.75rem 0.875rem;
+        gap: 0.625rem 0.75rem;
+    }
+
+    .datatable-mobile-card .field-label {
+        font-size: 0.625rem;
+    }
+
+    .datatable-mobile-card .field-value {
+        font-size: 0.8125rem;
+    }
+
+    .datatable-mobile-card .card-title {
+        font-size: 0.875rem;
+    }
+}
+
+/* ============================================
+   RTL Support
+   ============================================ */
+
+[dir="rtl"] .datatable-mobile-card .card-header {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .datatable-mobile-card .card-actions {
+    flex-direction: row-reverse;
+}

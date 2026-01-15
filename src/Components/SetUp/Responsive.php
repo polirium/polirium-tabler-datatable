@@ -17,6 +17,12 @@ final class Responsive implements Wireable
 
     public array $sortOrder = [];
 
+    public bool $mobileCardView = true;
+
+    public int $mobileBreakpoint = 768;
+
+    public array $mobileHiddenColumns = [];
+
     public function fixedColumns(string ...$columnNames): static
     {
         $this->fixedColumns = [...$columnNames];
@@ -39,6 +45,27 @@ final class Responsive implements Wireable
 
             $this->sortOrder[$key] = $column;
         }
+
+        return $this;
+    }
+
+    public function mobileCardView(bool $enabled = true): static
+    {
+        $this->mobileCardView = $enabled;
+
+        return $this;
+    }
+
+    public function mobileBreakpoint(int $breakpoint): static
+    {
+        $this->mobileBreakpoint = $breakpoint;
+
+        return $this;
+    }
+
+    public function hideOnMobile(string ...$columnNames): static
+    {
+        $this->mobileHiddenColumns = [...$columnNames];
 
         return $this;
     }

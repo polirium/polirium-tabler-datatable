@@ -5,7 +5,8 @@
     $dataTransformer = new DataTransformer($this);
     $tableIsLazy = !is_null(data_get($setUp, 'lazy'));
     $lazyConfig = data_get($setUp, 'lazy');
-    $rowsPerChildren = data_get($lazyConfig, 'rowsPerChildren')
+    $rowsPerChildren = data_get($lazyConfig, 'rowsPerChildren');
+    $enableMobileCard = data_get($setUp, 'responsive.mobileCardView', true);
 
     /** @var PowerGridComponent $this */
 
@@ -32,7 +33,13 @@
         @else
             @includeWhen($headerTotalColumn, 'polirium-datatable::components.table-header')
 
+            {{-- Table View - Hide on mobile when card mode is active --}}
+            @if($enableMobileCard)
+                <div x-data="pgMobileCard()">
+            @endif
+            <div x-show="showTableView()" class="datatable-table-view d-none d-md-block">
             @if (empty($lazyConfig))
+
 
                 @if (isset($setUp['detail']))
                     @foreach ($this->records as $row)
@@ -164,6 +171,25 @@
                         />
                     @endforeach
                 </div>
+            @endif
+            </div>
+
+            {{-- Mobile Card View - Show on mobile when card mode is active --}}
+            @if($enableMobileCard)
+                <div class="datatable-mobile-wrapper d-md-none" x-show="showCardView()">
+                    @foreach ($this->records as $row)
+                        @php
+                            $rowId = data_get($row, $this->realPrimaryKey);
+                        @endphp
+                        @include('polirium-datatable::components.frameworks.tabler.mobile-card', [
+                            'row' => $row,
+                            'rowId' => $rowId,
+                            'columns' => $this->visibleColumns->toArray(),
+                            'primaryKey' => $this->realPrimaryKey,
+                        ])
+                    @endforeach
+                </div>
+                </div>{{-- Close x-data="pgMobileCard()" --}}
             @endif
 
             @includeWhen($footerTotalColumn, 'polirium-datatable::components.table-footer')

@@ -13,6 +13,9 @@ return [
         'all' => 'All',
         'selected' => 'Selected',
         'filtered' => 'Filtered',
+        'export' => 'Export',
+        'columns' => 'Columns',
+        'toggle_hint' => 'Click to toggle visibility',
     ],
     'placeholders' => [
         'search' => 'Search...',

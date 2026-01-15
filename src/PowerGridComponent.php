@@ -118,6 +118,24 @@ class PowerGridComponent extends Component
     }
 
     #[Computed]
+    public function mobileCardEnabled(): bool
+    {
+        return (bool) data_get($this->setUp, 'responsive.mobileCardView', true);
+    }
+
+    #[Computed]
+    public function mobileBreakpoint(): int
+    {
+        return (int) data_get($this->setUp, 'responsive.mobileBreakpoint', 768);
+    }
+
+    #[Computed]
+    public function mobileHiddenColumns(): array
+    {
+        return (array) data_get($this->setUp, 'responsive.mobileHiddenColumns', []);
+    }
+
+    #[Computed]
     protected function records(): mixed
     {
         if (! $this->readyToLoad) {

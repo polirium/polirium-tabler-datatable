@@ -2,6 +2,7 @@ import pgToggleable from './pg-toggleable'
 import pgFlatpickr from "./pg-flatpickr";
 import pgEditable from "./pg-editable";
 import pgResponsive from './pgResponsive';
+import pgMobileCard from './pgMobileCard';
 import pgTomSelect from "./select/tomSelect";
 import pgSlimSelect from "./select/slimSelect";
 import pgLoadMore from "./pg-load-more";
@@ -13,6 +14,7 @@ window.pgToggleable = pgToggleable
 window.pgFlatpickr = pgFlatpickr
 window.pgEditable = pgEditable
 window.pgResponsive = pgResponsive
+window.pgMobileCard = pgMobileCard
 window.pgTomSelect = pgTomSelect
 window.pgSlimSelect = pgSlimSelect
 window.pgLoadMore = pgLoadMore

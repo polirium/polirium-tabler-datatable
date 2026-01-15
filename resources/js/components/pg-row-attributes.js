@@ -1,22 +1,25 @@
+/**
+ * PowerGrid Row Attributes Component
+ * Handles dynamic row attributes based on rules
+ */
 export default (params) => ({
     rowId: params.rowId,
     rules: params.rules,
     attributes: [],
     theme: [],
+
     init() {
         if (this.rules) {
             Object.values(this.rules).forEach((rule) => {
                 if ((rule.applyLoop || rule.apply) && rule?.attributes) {
-                    this.attributes.push(rule.attributes)
+                    this.attributes.push(rule.attributes);
                 }
-            })
+            });
         }
     },
 
     getAttributes() {
-        let attributes = {
-            class: $el.getAttribute('class') || '',
-        };
+        let attributes = {};
 
         this.attributes.forEach(attribute => {
             Object.keys(attribute).forEach(key => {
@@ -26,7 +29,7 @@ export default (params) => ({
                     if (!attributes[key]) {
                         attributes[key] = attribute[key];
                     } else {
-                        attributes[key] += ` ${attribute[key]}`
+                        attributes[key] += ` ${attribute[key]}`;
                     }
                 }
             });
