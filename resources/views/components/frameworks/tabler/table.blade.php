@@ -35,7 +35,7 @@
 
             {{-- Table View - Hide on mobile when card mode is active --}}
             @if($enableMobileCard)
-                <div x-data="pgMobileCard()">
+                <div>
             @endif
             <div x-show="showTableView()" class="datatable-table-view d-none d-md-block">
             @if (empty($lazyConfig))
@@ -189,7 +189,7 @@
                         ])
                     @endforeach
                 </div>
-                </div>{{-- Close x-data="pgMobileCard()" --}}
+                </div>
             @endif
 
             @includeWhen($footerTotalColumn, 'polirium-datatable::components.table-footer')

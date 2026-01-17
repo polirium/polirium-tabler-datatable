@@ -4,6 +4,10 @@ return [
     'buttons' => [
         'filter' => 'Lọc',
         'clear_all_filters' => 'Xóa tất cả',
+        'cards' => 'Thẻ',
+        'table' => 'Bảng',
+        'view_cards' => 'Xem dạng thẻ',
+        'view_table' => 'Xem dạng bảng',
     ],
     'labels' => [
         'action' => 'Thao tác',

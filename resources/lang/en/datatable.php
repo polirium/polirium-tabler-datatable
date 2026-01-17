@@ -4,6 +4,10 @@ return [
     'buttons' => [
         'filter' => 'Filter',
         'clear_all_filters' => 'Clear all',
+        'cards' => 'Cards',
+        'table' => 'Table',
+        'view_cards' => 'Cards view',
+        'view_table' => 'Table view',
     ],
     'labels' => [
         'action' => 'Actions',
