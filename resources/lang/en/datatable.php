@@ -1,0 +1,91 @@
+<?php
+
+return [
+    'buttons' => [
+        'filter' => 'Filter',
+        'clear_all_filters' => 'Clear all',
+        'cards' => 'Cards',
+        'table' => 'Table',
+        'view_cards' => 'Cards view',
+        'view_table' => 'Table view',
+    ],
+    'labels' => [
+        'action' => 'Actions',
+        'results_per_page' => 'Records per page',
+        'clear_filter' => 'Clear filter',
+        'no_data' => 'No records found',
+        'all' => 'All',
+        'selected' => 'Selected',
+        'filtered' => 'Filtered',
+        'export' => 'Export',
+        'columns' => 'Columns',
+        'toggle_hint' => 'Click to toggle visibility',
+    ],
+    'placeholders' => [
+        'search' => 'Search...',
+        'select' => 'Select a period',
+    ],
+    'pagination' => [
+        'showing' => 'Showing',
+        'to' => 'to',
+        'of' => 'of',
+        'results' => 'Results',
+        'all' => 'All',
+    ],
+    'multi_select' => [
+        'select' => 'Select',
+        'all' => 'All',
+    ],
+    'select' => [
+        'select' => 'Select',
+        'all' => 'All',
+    ],
+    'boolean_filter' => [
+        'all' => 'All',
+    ],
+    'input_text_options' => [
+        'is' => 'Is',
+        'is_not' => 'Is not',
+        'contains' => 'Contains',
+        'contains_not' => 'Does not contain',
+        'starts_with' => 'Starts with',
+        'ends_with' => 'Ends with',
+        'is_empty' => 'Is empty',
+        'is_not_empty' => 'Is not empty',
+        'is_null' => 'Is null',
+        'is_not_null' => 'Is not null',
+        'is_blank' => 'Is blank',
+        'is_not_blank' => 'Is not blank',
+    ],
+    'export' => [
+        'exporting' => 'Please wait!',
+        'completed' => 'Export completed! Your files are ready for download',
+    ],
+    'soft_deletes' => [
+        'message_with_trashed' => 'Displaying all records, including deleted ones.',
+        'message_only_trashed' => 'Displaying only deleted records.',
+        'without_trashed' => 'Without deleted',
+        'with_trashed' => 'With deleted',
+        'only_trashed' => 'Only deleted',
+    ],
+    'multi_sort' => [
+        'message' => 'Multiple sort is active',
+    ],
+    'buttons_macros' => [
+        'confirm' => [
+            'message' => 'Are you sure you want to perform this action?',
+        ],
+        'confirm_prompt' => [
+            'message' => "Are you sure you want to perform this action? \n\n Enter :confirmValue to confirm.",
+        ],
+    ],
+    'actions' => [
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'view' => 'View',
+        'copy' => 'Copy',
+        'link' => 'Open',
+        'confirm_delete' => 'Are you sure you want to delete?',
+        'copied' => 'Copied!',
+    ],
+];

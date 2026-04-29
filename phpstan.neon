@@ -1,0 +1,44 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+
+    level: 9
+
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics
+        - identifier: trait.unused
+        - identifier: argument.type
+        - identifier: assign.propertyType
+        - identifier: binaryOp.invalid
+        - identifier: method.notFound
+        - identifier: encapsedStringPart.nonString
+        - identifier: varTag.nativeType
+        - identifier: property.unusedType
+        - identifier: offsetAccess.invalidOffset
+        - identifier: array.invalidKey
+        - '#Cannot call method [a-zA-Z0-9\\_]#'
+        - '#Variable \$title might not be defined.#'
+        - '#^Method .*::fromLivewire\(\) has no return type specified\.#'
+        - '#^Method .*::fromLivewire\(\) has parameter \$value with no type specified\.#'
+        -
+            message: "#^Unable to resolve the template type TKey in call to function collect$#"
+            count: 1
+            path: src/Support/PowerGridTableCache.php
+
+        -
+            message: "#^Unable to resolve the template type TValue in call to function collect$#"
+            count: 1
+            path: src/Support/PowerGridTableCache.php
+
+    excludePaths:
+        - './src/Components/Exports/OpenSpout/*'
+        - './src/Livewire/PerformanceCard.php'
+        - './src/Recorders/PowerGridPerformanceRecorder.php'
+        - './src/Themes/Theme.php'
+        - './src/Testing/TestActions.php'
+
+    treatPhpDocTypesAsCertain: false

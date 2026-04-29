@@ -1,0 +1,74 @@
+<?php
+
+namespace Polirium\Datatable\Tests\Concerns\Components;
+
+use Illuminate\Database\Eloquent\Builder;
+use Polirium\Datatable\{Column,
+    Components\SetUp\Exportable,
+    Facades\PowerGrid,
+    PowerGridComponent,
+    PowerGridFields,
+    Traits\WithExport};
+use Polirium\Datatable\Tests\Concerns\Models\Dish;
+
+class BatchExportTable extends PowerGridComponent
+{
+    use WithExport;
+
+    public string $tableName = 'testing-batch-export-table';
+
+    public int $filterDataSourceId;
+
+    public ?int $idFromBatch = null;
+
+    public function setUp(): array
+    {
+        return [
+            PowerGrid::exportable('export')
+                ->striped()
+                ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV)
+                ->queues(6),
+
+            PowerGrid::header()
+                ->showSearchInput(),
+
+            PowerGrid::footer()
+                ->showPerPage()
+                ->showRecordCount(),
+        ];
+    }
+
+    public function datasource(array $parameters): Builder
+    {
+        return Dish::with('category')->where('id', $parameters['filterDataSourceId'] ?? 1);
+    }
+
+    public function fields(): PowerGridFields
+    {
+        return PowerGrid::fields()
+            ->add('id')
+            ->add('name');
+    }
+
+    public function columns(): array
+    {
+        return [
+            Column::add()
+                ->title(__('ID'))
+                ->field('id')
+                ->searchable()
+                ->sortable(),
+
+            Column::add()
+                ->title('Dish')
+                ->field('name')
+                ->searchable()
+                ->sortable(),
+        ];
+    }
+
+    public function setTestThemeClass(string $themeClass): void
+    {
+        config(['polirium-datatable.theme' => $themeClass]);
+    }
+}
