@@ -25,10 +25,11 @@
     "devDependencies": {
         "alpinejs": "^3.14.7",
         "blade-formatter": "^1.41.1",
-        "cypress": "^13.16.1",
+        "cypress": "^15.20.1",
+        "rollup": "^4.62.4",
         "sass": "^1.82.0",
         "tom-select": "^2.4.1",
-        "vite": "^6.4.1"
+        "vite": "^6.4.3"
     },
     "dependencies": {
         "inputmask": "^5.0.9"
