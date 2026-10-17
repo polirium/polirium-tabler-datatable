@@ -89,7 +89,7 @@
 
         {{-- Card Actions --}}
         @if($actionsColumn)
-            <div class="card-actions">
+            <div class="card-actions row-actions">
                 @if (method_exists($this, 'actionsFromView') && ($actionsFromView = $this->actionsFromView($row)))
                     <div wire:key="actions-view-mobile-{{ data_get($row, $primaryKey) }}">
                         {!! $actionsFromView !!}
