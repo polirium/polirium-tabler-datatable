@@ -19,7 +19,7 @@
                     </svg>
                 </span>
                 <input
-                    wire:model.live.debounce.600ms="search"
+                    wire:model.live.debounce.300ms="search"
                     type="text"
                     class="{{ theme_style($theme, 'searchBox.input') }}"
                     placeholder="{{ trans('polirium-datatable::datatable.placeholders.search') }}"

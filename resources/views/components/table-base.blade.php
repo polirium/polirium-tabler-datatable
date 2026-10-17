@@ -7,9 +7,12 @@
 ])
 <div @isset($this->setUp['responsive']) x-data="pgResponsive" @endisset>
     <div x-data="{ expandedId: null }">
+        {{-- Dim the rows while a search, filter, sort or page change loads. --}}
         <table
             id="table_base_{{ $tableName }}"
             class="table power-grid-table {{ theme_style($theme, 'table.layout.table') }}"
+            wire:loading.delay.class="pg-table-loading"
+            wire:target="search, perPage, sortBy, gotoPage, nextPage, previousPage, setPage, filters, filter, clearFilter, clearAllFilters"
         >
             <thead
                 class="{{ theme_style($theme, 'table.header.thead') }}"

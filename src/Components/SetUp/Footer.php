@@ -22,7 +22,7 @@ final class Footer implements Wireable
 
     public string $pageName = 'page';
 
-    public function showPerPage(int $perPage = 10, array $perPageValues = [10, 25, 50, 100, 0]): Footer
+    public function showPerPage(int $perPage = 10, array $perPageValues = [10, 25, 50, 100]): Footer
     {
         if (! in_array($perPage, $perPageValues, true)) {
             $hasZero = in_array(0, $perPageValues, true);
