@@ -88,4 +88,5 @@ return [
         'confirm_delete' => 'Are you sure you want to delete?',
         'copied' => 'Copied!',
     ],
+    'loading' => 'Loading…',
 ];

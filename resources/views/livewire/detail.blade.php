@@ -1,20 +1,24 @@
 <tr
-    x-data="{ collapsed: @entangle('show'), collapseOthers: @entangle('collapseOthers') }"
     class="{{ $trClass }}"
-    x-show="collapsed || (collapsed && collapseOthers && expandedId == '{{ $rowId }}')"
+    x-data="{ open: false }"
+    x-show="open"
+    x-on:pg-toggle-detail-{{ $tableName }}-{{ $rowId }}.window="open = !! $event.detail?.collapsed; if (open && ! $wire.show) { $wire.load() }"
+    x-on:pg-toggle-detail-{{ $tableName }}-hidden-all.window="open = false"
+    style="display: none"
 >
     <td colspan="999" style="padding: 0; border: 0;">
-        <div
-            x-show="collapsed"
-            x-transition:enter.duration.200ms
-            x-transition:leave.duration.150ms
-            x-transition.opacity
-            style="overflow: hidden;"
-        >
-            @includeWhen($show, $view, [
-                'id' => $rowId,
-                'options' => $options,
-            ])
+        <div x-show="open" x-transition.opacity.duration.150ms style="overflow: hidden;">
+            @if ($show)
+                @include($view, [
+                    'id' => $rowId,
+                    'options' => $options,
+                ])
+            @else
+                <div class="d-flex align-items-center justify-content-center gap-2 py-4 text-secondary">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                    <span>{{ __('polirium-datatable::datatable.loading') }}</span>
+                </div>
+            @endif
         </div>
     </td>
 </tr>

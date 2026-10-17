@@ -125,4 +125,5 @@ return [
         'confirm_delete' => 'Bạn có chắc chắn muốn xóa?',
         'copied' => 'Đã copy!',
     ],
+    'loading' => 'Đang tải…',
 ];
