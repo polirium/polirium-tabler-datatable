@@ -34,6 +34,9 @@ class Detail extends Component
 
     public bool $collapseOthers = false;
 
+    /** Active tab of detail views that switch tabs on the server ($set('tab', n)). */
+    public int $tab = 1;
+
     public function load(): void
     {
         $this->show = true;
