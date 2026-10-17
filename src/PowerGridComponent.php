@@ -65,6 +65,13 @@ class PowerGridComponent extends Component
 
         $this->restoreState();
 
+        // "?q=" opens the table already searched (used by the global search).
+        $term = request()->query('q');
+
+        if (is_string($term) && trim($term) !== '') {
+            $this->search = mb_substr(trim($term), 0, 100);
+        }
+
         $this->resolveSummarizeColumn();
     }
 
