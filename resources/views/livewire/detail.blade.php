@@ -1,4 +1,7 @@
+{{-- Showing and hiding is the browser's job: Livewire must not reset this
+     row's attributes (display) when the content arrives. --}}
 <tr
+    wire:ignore.self
     class="{{ $trClass }}"
     x-data="{ open: false }"
     x-show="open"
@@ -7,7 +10,7 @@
     style="display: none"
 >
     <td colspan="999" style="padding: 0; border: 0;">
-        <div x-show="open" x-transition.opacity.duration.150ms style="overflow: hidden;">
+        <div style="overflow: hidden;">
             @if ($show)
                 @include($view, [
                     'id' => $rowId,
