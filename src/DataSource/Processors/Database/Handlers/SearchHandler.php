@@ -27,7 +27,9 @@ class SearchHandler
         $search = trim(strtolower(htmlspecialchars($this->component->search, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
         $hasRelationSearch = count($this->component->relationSearch()) && $query instanceof EloquentBuilder;
 
-        $query->where(function (EloquentBuilder|QueryBuilder $subQuery) use ($search, $hasRelationSearch) {
+        // Column and relation matches form one OR-group, so they never escape the
+        // table's own conditions (for example its branch filter).
+        $query->where(function (EloquentBuilder|QueryBuilder $subQuery) use ($query, $search, $hasRelationSearch) {
             $modelTable = $subQuery instanceof QueryBuilder ? $subQuery->from : $subQuery->getModel()->getTable();
             $columnList = $this->getColumnList($subQuery, $modelTable);
 
@@ -48,39 +50,43 @@ class SearchHandler
                         $subQuery->orWhere("{$table}.{$field}", Sql::like($subQuery), "%{$search}%");
                     }
                 });
-        });
 
-        if ($hasRelationSearch) {
-            $this->filterRelation($query, $search);
-        }
+            if ($hasRelationSearch) {
+                $this->filterRelation($query, $subQuery, $search);
+            }
+        });
 
         return $query;
     }
 
-    private function filterRelation(EloquentBuilder $query, string $search): void
+    /**
+     * @param EloquentBuilder $query the table query (joins are added here)
+     * @param EloquentBuilder $group the search OR-group (conditions go here)
+     */
+    private function filterRelation(EloquentBuilder $query, EloquentBuilder $group, string $search): void
     {
         foreach ($this->component->relationSearch() as $table => $columns) {
             if (is_array($columns)) {
-                $this->filterNestedRelation($query, $table, $columns, $search);
+                $this->filterNestedRelation($query, $group, $table, $columns, $search);
 
                 continue;
             }
 
-            $query->orWhereHas($table, function (EloquentBuilder $subQuery) use ($columns, $search) {
+            $group->orWhereHas($table, function (EloquentBuilder $subQuery) use ($columns, $search) {
                 $search = $this->getBeforeSearchMethod($columns, $search);
                 $subQuery->when($search, fn ($q) => $q->where($columns, Sql::like($q), '%' . $search . '%'));
             });
         }
     }
 
-    private function filterNestedRelation(EloquentBuilder $query, string $table, array $columns, string $search): void
+    private function filterNestedRelation(EloquentBuilder $query, EloquentBuilder $group, string $table, array $columns, string $search): void
     {
         foreach ($columns as $nestedTable => $nestedColumns) {
             if (is_array($nestedColumns)) {
                 try {
                     if ($query->getRelation($nestedTable) != '') {
                         $nestedTableWithDot = $table . '.' . $nestedTable;
-                        $query->orWhereHas($nestedTableWithDot, function (EloquentBuilder $subQuery) use ($nestedColumns, $search) {
+                        $group->orWhereHas($nestedTableWithDot, function (EloquentBuilder $subQuery) use ($nestedColumns, $search) {
                             foreach ($nestedColumns as $nestedColumn) {
                                 $search = $this->getBeforeSearchMethod($nestedColumn, $search);
                                 $subQuery->when($search, fn ($q) => $q->where($nestedColumn, Sql::like($q), '%' . $search . '%'));
@@ -96,7 +102,7 @@ class SearchHandler
                         $query->leftJoin($nestedTable, "$table." . $nestedTable . '_id', '=', "$nestedTable.id");
                     }
 
-                    $query->orWhere(function (EloquentBuilder $subQuery) use ($nestedTable, $nestedColumns, $search) {
+                    $group->orWhere(function (EloquentBuilder $subQuery) use ($nestedTable, $nestedColumns, $search) {
                         foreach ($nestedColumns as $nestedColumn) {
                             $search = $this->getBeforeSearchMethod($nestedColumn, $search);
                             $subQuery->when($search, fn ($q) => $q->where("$nestedTable.$nestedColumn", Sql::like($q), '%' . $search . '%'));
@@ -107,7 +113,7 @@ class SearchHandler
                 continue;
             }
 
-            $query->orWhereHas($table, function (EloquentBuilder $subQuery) use ($nestedColumns, $search) {
+            $group->orWhereHas($table, function (EloquentBuilder $subQuery) use ($nestedColumns, $search) {
                 $search = $this->getBeforeSearchMethod($nestedColumns, $search);
                 $subQuery->when($search, fn ($q) => $q->where($nestedColumns, Sql::like($q), '%' . $search . '%'));
             });
