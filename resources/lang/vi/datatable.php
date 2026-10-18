@@ -12,6 +12,7 @@ return [
     ],
     'labels' => [
         'action' => 'Thao tác',
+        'page' => 'trang',
         'results_per_page' => 'Bản ghi mỗi trang',
         'clear_filter' => 'Xóa bộ lọc',
         'no_data' => 'Không có dữ liệu',

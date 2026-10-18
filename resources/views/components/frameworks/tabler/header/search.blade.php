@@ -1,11 +1,12 @@
 @if (data_get($setUp, 'header.searchInput'))
-    <div class="d-inline-block ms-2">
+    <div class="input-icon pg-search">
+        <span class="input-icon-addon">{!! tabler_icon('search', ['class' => 'icon']) !!}</span>
         <input
             wire:model.live.debounce.300ms="search"
-            type="text"
-            class="{{ theme_style($theme, 'searchBox.input') }}"
+            type="search"
+            class="form-control"
             placeholder="{{ trans('polirium-datatable::datatable.placeholders.search') }}"
-            aria-label="Search"
+            aria-label="{{ trans('polirium-datatable::datatable.placeholders.search') }}"
         >
     </div>
 @endif

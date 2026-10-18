@@ -57,6 +57,7 @@
                                     return {
                                         collapsed: false,
                                         loading: false,
+                                        preloadTimer: null,
                                         collapseOthers: @js(data_get($setUp, 'detail.collapseOthers', false)),
                                         toggleDetail() {
                                             const isOpen = this.collapsed;
@@ -77,9 +78,14 @@
                                 }"
                                 x-on:pg-toggle-detail-{{ $tableName }}-hidden-all.window="collapsed = false"
                                 x-on:pg-toggle-detail-{{ $tableName }}-loaded.window="loading = false;"
+                                x-on:mouseenter="preloadTimer = setTimeout(() => $dispatch('pg-preload-detail-{{ $tableName }}-{{ $rowId }}'), 150)"
+                                x-on:mouseleave="clearTimeout(preloadTimer)"
                                 x-on:click="if ($event.target.tagName !== 'BUTTON' && $event.target.tagName !== 'A' && !$event.target.closest('button') && !$event.target.closest('a') && !$event.target.closest('input') && !$event.target.closest('select') && !$event.target.closest('.dropdown') && !$event.target.closest('.form-check')) { toggleDetail(); }"
-                                class="cursor-pointer"
-                                style="cursor: pointer;"
+                                @if (isset($setUp['detail']))
+                                    class="cursor-pointer pg-row-expandable"
+                                    :class="{ 'pg-row-open': collapsed }"
+                                    :aria-expanded="collapsed ? 'true' : 'false'"
+                                @endif
                             >
                                 @include(data_get($theme, 'root') . '.row', [
                                     'rowIndex' => $loop->index + 1,

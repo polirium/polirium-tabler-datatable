@@ -1,67 +1,59 @@
 <div>
     @includeIf(data_get($setUp, 'header.includeViewOnTop'))
 
-    @if(data_get($setUp, 'header.title') || data_get($setUp, 'header.searchInput') || data_get($setUp, 'exportable') || data_get($setUp, 'header.toggleColumns'))
+    @if(data_get($setUp, 'header.title'))
         <div class="card-header">
-            @if(data_get($setUp, 'header.title'))
-                <h3 class="card-title">{{ data_get($setUp, 'header.title') }}</h3>
-            @endif
+            <h3 class="card-title">{{ data_get($setUp, 'header.title') }}</h3>
         </div>
+    @endif
 
-        <div class="card-body border-bottom py-3">
-            <div class="d-flex flex-wrap gap-2 align-items-center">
-                <div class="d-flex flex-wrap gap-2 align-items-center text-secondary">
-                    @if (filled(data_get($setUp, 'footer.perPage')) && count(data_get($setUp, 'footer.perPageValues')) > 1)
-                        <span class="text-nowrap">Show</span>
-                        <select
-                            wire:model.live="setUp.footer.perPage"
-                            class="form-select form-select-sm {{ theme_style($theme, 'footer.select') }}"
-                            style="width: auto;"
-                        >
-                            @foreach (data_get($setUp, 'footer.perPageValues') as $value)
-                                <option value="{{ $value }}">
-                                    @if ($value == 0)
-                                        {{ trans('polirium-datatable::datatable.pagination.all') }}
-                                    @else
-                                        {{ $value }}
-                                    @endif
-                                </option>
-                            @endforeach
-                        </select>
-                        <span class="text-nowrap">
-                            {{ trans('polirium-datatable::datatable.labels.results_per_page') }}
-                        </span>
-                    @endif
+    @if(data_get($setUp, 'header.searchInput') || data_get($setUp, 'exportable') || data_get($setUp, 'header.toggleColumns') || filled(data_get($setUp, 'footer.perPage')))
+        {{-- Toolbar: search on the left; columns, export and page size on the right. --}}
+        <div class="pg-toolbar">
+            <div class="pg-toolbar-start">
+                @include(data_get($theme, 'root') . '.header.search')
 
-                    <div x-data="pgRenderActions">
-                        <span class="{{ theme_style($theme, 'table.layout.actions') }}" x-html="toHtml"></span>
-                    </div>
+                @if($filterBuilderEnabled ?? false)
+                    <button type="button"
+                            class="btn btn-icon btn-ghost-secondary"
+                            wire:click="toggleFilterBuilder"
+                            title="{{ __('polirium-datatable::datatable.buttons.filter_builder') }}">
+                        {!! tabler_icon('filter', ['class' => 'icon']) !!}
+                        @if(isset($filterBuilderGroup) && count($filterBuilderGroup->conditions) > 0)
+                            <span class="badge bg-primary">{{ count(collect($filterBuilderGroup->conditions)->filter(fn($c) => $c->isValid())) }}</span>
+                        @endif
+                    </button>
+                @endif
 
-                    @includeWhen(data_get($setUp, 'exportable'), data_get($theme, 'root') . '.header.export')
-                    @include(data_get($theme, 'root') . '.header.toggle-columns')
-                    @includeIf(data_get($theme, 'root') . '.header.soft-deletes')
+                @if (config('polirium-datatable.filter') === 'outside')
+                    @include(data_get($theme, 'root') . '.header.filters')
+                @endif
+
+                <div x-data="pgRenderActions">
+                    <span class="{{ theme_style($theme, 'table.layout.actions') }}" x-html="toHtml"></span>
                 </div>
+            </div>
 
-                <div class="ms-auto d-flex gap-2 align-items-center text-secondary">
-                    @if($filterBuilderEnabled ?? false)
-                        <button type="button"
-                                class="btn btn-sm btn-ghost-secondary"
-                                wire:click="toggleFilterBuilder"
-                                title="{{ __('polirium-datatable::datatable.buttons.filter_builder') }}">
-                            {!! tabler_icon('filter', ['class' => 'icon']) !!}
-                            @if(isset($filterBuilderGroup) && count($filterBuilderGroup->conditions) > 0)
-                                <span class="badge bg-primary">{{ count(collect($filterBuilderGroup->conditions)->filter(fn($c) => $c->isValid())) }}</span>
-                            @endif
-                        </button>
-                    @endif
+            <div class="pg-toolbar-end">
+                @includeWhen(boolval(data_get($setUp, 'header.wireLoading')), data_get($theme, 'root') . '.header.loading')
+                @include(data_get($theme, 'root') . '.header.toggle-columns')
+                @includeWhen(data_get($setUp, 'exportable'), data_get($theme, 'root') . '.header.export')
+                @includeIf(data_get($theme, 'root') . '.header.soft-deletes')
 
-                    @if (config('polirium-datatable.filter') === 'outside')
-                        @include(data_get($theme, 'root') . '.header.filters')
-                    @endif
-
-                    @include(data_get($theme, 'root') . '.header.search')
-                    @includeWhen(boolval(data_get($setUp, 'header.wireLoading')), data_get($theme, 'root') . '.header.loading')
-                </div>
+                @if (filled(data_get($setUp, 'footer.perPage')) && count(data_get($setUp, 'footer.perPageValues')) > 1)
+                    <select
+                        wire:model.live="setUp.footer.perPage"
+                        class="form-select pg-per-page"
+                        title="{{ trans('polirium-datatable::datatable.labels.results_per_page') }}"
+                        aria-label="{{ trans('polirium-datatable::datatable.labels.results_per_page') }}"
+                    >
+                        @foreach (data_get($setUp, 'footer.perPageValues') as $value)
+                            <option value="{{ $value }}">
+                                {{ $value == 0 ? trans('polirium-datatable::datatable.pagination.all') : $value . ' / ' . trans('polirium-datatable::datatable.labels.page') }}
+                            </option>
+                        @endforeach
+                    </select>
+                @endif
             </div>
         </div>
     @endif

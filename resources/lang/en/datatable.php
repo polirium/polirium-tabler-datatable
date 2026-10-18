@@ -11,6 +11,7 @@ return [
     ],
     'labels' => [
         'action' => 'Actions',
+        'page' => 'page',
         'results_per_page' => 'Records per page',
         'clear_filter' => 'Clear filter',
         'no_data' => 'No records found',

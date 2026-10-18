@@ -42,9 +42,12 @@ final class Detail implements Wireable
         return $this;
     }
 
+    /**
+     * Kept for compatibility: rows open their detail with a click anywhere on
+     * the row, so no column is spent on a +/- icon.
+     */
     public function showCollapseIcon(string $viewIcon = ''): Detail
     {
-        $this->showCollapseIcon = true;
         $this->viewIcon = $viewIcon;
 
         return $this;
